@@ -12,11 +12,11 @@ public:
     Point(const Point &original);
     ~Point();
 
-    Point&  operator=( const Point &other );
-
     Fixed getX(void) const;
     Fixed getY(void) const;
     
+    Point&  operator=( const Point &other );
 
 
 };
+bool bsp( Point const a, Point const b, Point const c, Point const point);
