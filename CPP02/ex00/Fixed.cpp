@@ -9,7 +9,7 @@ Fixed::Fixed()
 Fixed::~Fixed()
 {
     std::cout << "Destructor Called" << std::endl;
-}
+} 
 
 Fixed &Fixed::operator=(Fixed &other)
 {
