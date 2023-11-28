@@ -3,9 +3,9 @@ all:
 	@echo "Derlendi"
 
 wrong:
-	@c++ -o WrongPolymorphism main.cpp WrongAnimal.cpp WrongCat.cpp -Wall -Wextra -Werror -std=c++98 
+	@c++ -o WrongPolymorphism wrongmain.cpp WrongAnimal.cpp WrongCat.cpp -Wall -Wextra -Werror -std=c++98 
 	@echo "Yanlış kod derlendi"
 fclean:
-	rm -rf Polymorphism
+	rm -rf Polymorphism WrongPolymorphism
 
 re: fclean all
