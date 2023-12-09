@@ -1,27 +1,41 @@
 #include "AMateria.hpp"
+#include "debug.hpp"
 
-AMateria::AMateria(std::string const & type) : type(type)
+
+AMateria::AMateria( void ) : _type("")
 {
-    std::cout << "AMateria constructor called" << std::endl;
+    if (DEBUG)
+        std::cout << "Material kaynağı oluşturuldu." << std::endl;
 }
 
-AMateria::~AMateria()
+AMateria::AMateria( std::string const & type )  : _type(type)
 {
-    std::cout << "AMateria destructor called" << std::endl;
+    if (DEBUG)
+        std::cout << "[AMateria]: " << this->_type << " oluşturldu." << std::endl;
+}
+
+AMateria::AMateria( AMateria const & src )
+{
+    *this = src;
+}
+
+AMateria::~AMateria( void )
+{
+    if (DEBUG)
+        std::cout << "[AMateria]: " << this->_type << " silindi." << std::endl;
 }
 
 std::string const & AMateria::getType() const
 {
-    return (this->type);
-}
-
-void AMateria::use(ICharacter& target)
-{
-    std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+    return this->_type;
 }
 
 AMateria* AMateria::clone() const
 {
-    return (new AMateria(*this));
+    return (AMateria*)this;
 }
 
+void    AMateria::use( ICharacter& target )
+{
+    std::cout << "[AMateria]: " << this->_type << " default use kullanıldı " << target.getName() << std::endl;
+}
