@@ -22,7 +22,7 @@ class Form
 		Form const	&operator=(Form const &copy);
 
 		/* Getters & Setters */
-		std::string const	&getName(void) const;
+		const std::string	&getName(void) const;
 		bool const			&getIsSigned(void) const;
 		int const			&getSignGrade(void) const;
 		int const			&getExecGrade(void) const;

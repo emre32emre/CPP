@@ -1,8 +1,8 @@
 #include "Form.hpp"
-
+#include "Bureaucrat.hpp"
 int main(void)
 {
-	/* Create a form with grade too high */
+
 	{
 		try
 		{
@@ -18,7 +18,7 @@ int main(void)
 
 	std::cout << "\n --------------------- \n\n";
 
-	/* Create form and sign it without exceptions */
+
 	{
 		try
 		{
@@ -37,7 +37,7 @@ int main(void)
 	
 	std::cout << "\n --------------------- \n\n";
 
-	/* Create form and try to sign it but the grade is not enough */
+
 	{
 		try
 		{
