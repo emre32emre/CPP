@@ -1,31 +1,41 @@
-#pragma once 
+#pragma once
 
 #include <iostream>
 
-class Bureaucrat{
+class Bureaucrat
+{
+	private:
+		std::string 		_name;
+		int					_grade;
+	public:
+		/* Constructors & Destructors */
+		Bureaucrat(void);
+		Bureaucrat(std::string const &name, int grade);
+		Bureaucrat(Bureaucrat const &copy);
+		~Bureaucrat(void);
 
-private:
-    const std::string name;
-    int grade;
+		/* Basic Operators */
+		Bureaucrat const	&operator=(Bureaucrat const &copy);
 
-public:
-    Bureaucrat();
-    Bureaucrat(const std::string &name, int grade);
-    Bureaucrat(const Bureaucrat &other);
-    ~Bureaucrat();
-    Bureaucrat &operator =(const Bureaucrat &other);
+		/* Getters & Setters */
+		std::string const	&getName(void) const;
+		int const			&getGrade(void) const;
 
-    const std::string &getName() const;
-    int getGrade() const;
+		/* Main Member Functions */
+		void	gradeUp(void);
+		void	gradeDown(void);
 
-    void incrementGrade(int change = 1);
-    void decrementGrade(int change = 1);
-
-    class GradeTooHighException: public std::exception{
-        virtual const char* what() const throw();
-    };
-
-    class GradeTooLowException: public std::exception {
-		virtual const char*	what() const throw();
-	};
+		/* Exceptions */
+		class GradeTooHighException: public std::exception
+		{
+			public:
+				virtual char const	*what(void) const throw();
+		};
+		class GradeTooLowException: public std::exception
+		{
+			public:
+				virtual char const	*what(void) const throw();
+		};
 };
+
+std::ostream	&operator<<(std::ostream &str, Bureaucrat const &bureaucrat);
