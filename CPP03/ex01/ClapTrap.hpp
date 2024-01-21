@@ -2,7 +2,7 @@
 #include "iostream"
 
 class ClapTrap{
-protected:
+z:
     std::string name;
     unsigned int hitPoints;
     unsigned int energyPoints;
