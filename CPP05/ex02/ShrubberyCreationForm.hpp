@@ -9,8 +9,7 @@
 
 class Bureaucrat;
 
-class ShrubberyCreationForm: public Form
-{
+class ShrubberyCreationForm: public Form{
 	private:
 		std::string	_target;
 	public:

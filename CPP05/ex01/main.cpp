@@ -6,7 +6,7 @@ int main(void)
 	{
 		try
 		{
-			Form form0("A99", 0, 5);
+			Form form0("Ehliyet Belgesi", 0, 5);
 			std::cout << form0 << std::endl;
 		}
 		catch(std::exception &e)
@@ -22,8 +22,8 @@ int main(void)
 	{
 		try
 		{
-			Bureaucrat mike("Mike", 15);
-			Form form("B58", 20, 45);
+			Bureaucrat mike("Musa", 15);
+			Form form("Kimlik Belgesi", 20, 45);
 			std::cout << mike << std::endl;
 			std::cout << form << std::endl;
 			mike.signForm(form);
@@ -41,8 +41,8 @@ int main(void)
 	{
 		try
 		{
-			Bureaucrat jon("Jon", 35);
-			Form form2("C_303", 20, 45);
+			Bureaucrat jon("Ahmet", 35);
+			Form form2("Kalaşnikof belgesi", 20, 45);
 			std::cout << jon << std::endl;
 			std::cout << form2 << std::endl;
 			jon.signForm(form2);

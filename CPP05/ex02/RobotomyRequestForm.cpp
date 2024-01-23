@@ -12,15 +12,13 @@ RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy): Form:
 
 RobotomyRequestForm::~RobotomyRequestForm(void) {}
 
-RobotomyRequestForm const	&RobotomyRequestForm::operator=(const RobotomyRequestForm &copy)
-{
+RobotomyRequestForm const	&RobotomyRequestForm::operator=(const RobotomyRequestForm &copy){
 	Form::operator=(copy);
 	this->_target = copy._target;
 	return (*this);
 }
 
-void	RobotomyRequestForm::beExecuted(const Bureaucrat &bureaucrat) const
-{
+void	RobotomyRequestForm::beExecuted(const Bureaucrat &bureaucrat) const{
 	int	success;
 
 	/* Set Seed */
@@ -33,7 +31,4 @@ void	RobotomyRequestForm::beExecuted(const Bureaucrat &bureaucrat) const
 		std::cout << this->_target << "'s robotomization failed" << std::endl;
 }
 
-std::ostream	&operator<<(std::ostream &str, RobotomyRequestForm const &form)
-{
-	return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());
-}
+std::ostream	&operator<<(std::ostream &str, RobotomyRequestForm const &form){return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());}

@@ -11,15 +11,13 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &copy):
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
 
-ShrubberyCreationForm const	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &copy)
-{
+ShrubberyCreationForm const	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &copy){
 	Form::operator=(copy);
 	this->_target = copy._target;
 	return (*this);
 }
 
-void	ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) const
-{
+void	ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) const{
 	std::ofstream	outfile;
 	
 	outfile.open((this->_target + "_shrubbery").c_str());
@@ -33,7 +31,4 @@ void	ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) const
 	std::cout << bureaucrat.getName() << " successfully created a shrubbery" << std::endl;
 }
 
-std::ostream	&operator<<(std::ostream &str, ShrubberyCreationForm const &form)
-{
-	return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());
-}
+std::ostream	&operator<<(std::ostream &str, ShrubberyCreationForm const &form){return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());}

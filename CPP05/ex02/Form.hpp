@@ -14,27 +14,27 @@ class Form
 		int const			_signGrade;
 		int const			_execGrade;
 	public:
-		/* Constructors & Destructors */
+		
 		Form(void);
 		Form(std::string const &name, int const &signGrade, int const &execGrade);
 		Form(Form const &copy);
 		virtual ~Form(void);
 
-		/* Basic Operators */
+		
 		Form const	&operator=(Form const &copy);
 
-		/* Getters & Setters */
+		
 		std::string const	&getName(void) const;
 		bool const			&getIsSigned(void) const;
 		int const			&getSignGrade(void) const;
 		int const			&getExecGrade(void) const;
 
-		/* Main Member Functions */
+		
 		void			beSigned(Bureaucrat &bureaucrat);
 		void			execute(Bureaucrat const &executor) const;
 		virtual void	beExecuted(Bureaucrat const &bureaucrat) const = 0;
 
-		/* Exceptions */
+		
 		class GradeTooHighException: public std::exception
 		{
 			public:

@@ -3,21 +3,16 @@
 
 Intern::Intern(void) {}
 
-Intern::Intern(Intern const &copy)
-{
-	*this = copy;
-}
+Intern::Intern(Intern const &copy){*this = copy;}
 
 Intern::~Intern(void) {}
 
-Intern const	&Intern::operator=(const Intern &copy)
-{
+Intern const	&Intern::operator=(const Intern &copy){
 	(void)copy;
 	return (*this);
 }
 
-Form	*Intern::makeForm(const std::string &type, const std::string &target)
-{
+Form	*Intern::makeForm(const std::string &type, const std::string &target){
 	Form	*form;
 
 	form = Form::makeForm(type, target);

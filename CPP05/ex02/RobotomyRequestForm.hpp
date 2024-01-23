@@ -7,21 +7,20 @@
 
 class Bureaucrat;
 
-class RobotomyRequestForm: public Form
-{
+class RobotomyRequestForm: public Form{
 	private:
 		std::string	_target;
 	public:
-		/* Constructors & Destructors */
+		
 		RobotomyRequestForm(void);
 		RobotomyRequestForm(std::string const &target);
 		RobotomyRequestForm(RobotomyRequestForm const &copy);
 		~RobotomyRequestForm(void);
 
-		/* Basic Operators */
+		
 		RobotomyRequestForm const	&operator=(RobotomyRequestForm const &copy);
 
-		/* Main Member Functions */
+		
 		void	beExecuted(Bureaucrat const &bureaucrat) const;
 };
 

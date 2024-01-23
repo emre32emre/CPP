@@ -10,7 +10,7 @@ int main(void)
 	Form		*form;
 	Bureaucrat	karen("Karen", 50);
 
-	// Test how all forms are created properly execpt for the last one
+	
 	try
 	{
 		form = bob.makeForm("robotomy request", "Alice");
@@ -27,7 +27,6 @@ int main(void)
 		std::cout << "Caught exception: " << e.what() << std::endl;
 	}
 
-	// Test some Actions with available form
 	std::cout << "------------------------------------" << std::endl;
 	form = bob.makeForm("shrubbery creation", "Fred");
 	form->beSigned(karen);
