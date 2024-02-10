@@ -5,34 +5,29 @@ class Obje {
 public:
     std::string _name;
     int _en;
-    int *_boy = new int;
-
+    int *_boy;
     Obje(int en, int *boy, std::string name ){
         _en = en;
         _boy = boy;
         _name = name;
     }
 
-    Obje(const Obje &other){
+    // Obje(const Obje &other){
 
-        *this = other;
-    }
+    //     *this = other;
+    // }
 
-    Obje& operator=(const Obje& other) {
-        if (this != &other) { // Kendi kendine atanma kontrolü
-            _en = other._en;
-            int *f = new int(*other._boy);
-            _boy = f;
-            delete f;
-            _name = other._name;
-        }
+    // Obje& operator=(const Obje& other) {
+    //     if (this != &other) { // Kendi kendine atanma kontrolü
+    //         _en = other._en;
+    //         int *f = new int(*other._boy);
+    //         _boy = f;
+    //         delete f;
+    //         _name = other._name;
+    //     }
 
-        return *this;
-    }
-
-    ~Obje() {
-        delete _boy;
-    }
+    //     return *this;
+    // }
 
 };
 
