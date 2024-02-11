@@ -1,8 +1,8 @@
 #include "ScalarConverter.hpp"
 
+bool	is_default(std::string &s) {return (s == "nan" || s == "nanf" || s == "+inf" || s == "inf" || s == "-inf" || s == "+inff" || s == "inff" || s == "-inff");}
 
-static int check_all_item(std::string str)
-{
+static int check_all_item(std::string str) {
     char tmp2;
     size_t i = 0, moref = 0, moreinc = 0, moredec = 0, morepoint = 0;
     for (i = 0; i < str.size(); i++) {
@@ -19,18 +19,16 @@ static int check_all_item(std::string str)
 }
 
 
-bool	is_default(std::string &s) {return (s == "nan" || s == "nanf" || s == "+inf" || s == "inf" || s == "-inf" || s == "+inff" || s == "inff" || s == "-inff");}
 
 
-bool is_valid(std::string &str)
-{
+bool is_valid(std::string &str) {
 	size_t	i;
 	char	c;
 
 	if (is_default(str))
 		return (true);
 	if (str.length() == 1 && isascii(str[0]) && !isdigit(str[0])) {
-		str = std::to_string(static_cast<int>(str[0])); // ascii to int
+		//str = std::to_string(static_cast<int>(str[0])); // ascii to int
 		return (true);
 	}
 	if(check_all_item(str) != 1)
@@ -44,58 +42,63 @@ bool is_valid(std::string &str)
 	return (true);
 }
 
-void convert_to_char(std::string &str) {
-	if (is_default(str)) {
-		std::cout << "impossible" << std::endl;
-		return ;
-	}
-    int num = std::atoi(str.c_str());
-    char c = static_cast<char>(num);
-    if (!isprint(c) || (std::stoi(str) > 125)){
-        std::cout << "Non Displayable" << std::endl;
-        return;
-    }
-	std::cout << "'" << c << "'" <<  std::endl;
+int ft_stoi(std::string s) {
+  int multiplier = 1, result = 0;
+  for (int i = s.length() - 1; i >= 0; i--) {
+    result += multiplier * (s[i] - '0');
+    multiplier *= 10;
+  }
+  return result;
 }
 
-void	convert_to_float(std::string &str)
-{
-	float number = std::strtof(str.c_str(), nullptr); // second params is for error handling (first invalid char adress)
-	if (number - static_cast<int>(number) == 0)
-	{
-		std::cout << number << ".0f" << std::endl;
-		return ;
-	}
-	std::cout << number << "f" << std::endl;
-}
-
-
-void	convert_to_double(std::string &str)
-{
-	double number = std::strtod(str.c_str(), nullptr);
-	if (number - static_cast<int>(number) == 0)
-	{
-		std::cout << number << ".0" << std::endl;
-		return ;
-	}
-	std::cout << number << std::endl;
-}
-
-
-void	convert_to_int(std::string &str)
-{
-	if (is_default(str)) {
+void convertChar(std::string literal){
+	if (is_default(literal)){
 		std::cout << "impossible" << std::endl;
 		return;
 	}
-	std::cout << std::atoi(str.c_str()) << std::endl;
+	char c;
+	if (literal.length() == 1){
+		c = static_cast<char>(literal[0]);	
+		if (literal[0] >= ' ' && literal[0] <= '~' && !isdigit(literal[0]))
+		{
+			std::cout <<  "'" << c << "'" << std::endl;
+		}
+		else
+		{
+			std::cout << "Non displayable" << std::endl;
+			return;
+		}
+	}
+
+	else{
+		c = static_cast<char>(ft_stoi(literal));
+		std::cout <<  "'" << c << "'" << std::endl;
+	}
 }
 
-void	conversion_of_scalar_types(std::string str) {
-	std::cout << "Char   : ", convert_to_char(str);
-	std::cout << "Int    : ", convert_to_int(str);
-	std::cout << "Float  : ", convert_to_float(str);
-	std::cout << "Double : ", convert_to_double(str);
+void convertInt(std::string literal){
+	if (is_default(literal)){
+		std::cout << "impossible" << std::endl;
+		return;
+	}
+	int d = 0;
+	if (literal.length() == 1 && isascii(literal[0]) && !isdigit(literal[0])){
+
+		d = static_cast<int>(literal[0]);
+		std::cout << d << std::endl;
+	}
+	else{
+		d = static_cast<int>(ft_stoi(literal));
+		std::cout << d << std::endl;
+	}
+}
+
+void print_data(std::string literal){
+	std::cout << "char : " ; convertChar(literal) ; 
+	std::cout << "int : " ; convertInt(literal) ;
+	std::cout << "float : " << std::endl;
+	std::cout << "double : " << std::endl;
+
 }
 
 
@@ -103,8 +106,15 @@ void ScalarConverter::convert(std::string &literal){
 
 	bool is_okey = is_valid(literal);
 
-	if (is_okey) conversion_of_scalar_types(literal);
+	std::cout << "is_valid : " << is_okey << std::endl;
+	if (is_okey)
+	{
+		print_data(literal);
+	}
+	else
+	{
+		std::cout << "Error : invalid literal" << std::endl;
+	}
 
-	else std::cout << "Invalid" << std::endl; 
 
 }
