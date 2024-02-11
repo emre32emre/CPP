@@ -22,5 +22,13 @@ class ScalarConverter
         ScalarConverter(const ScalarConverter& copy);
         ScalarConverter &operator=(const ScalarConverter& copy);
     public:
-        static void	convert(std::string &literal);
+        static void	convert_to_char(std::string &str);
+        static void	convert_to_int(std::string &str);
+        static void	convert_to_float(std::string &str);
+        static void	convert_to_double(std::string &str);
+        static bool	is_valid(std::string &str);
+
 };
+
+    bool	is_pseudo_literal(std::string &s);
+    void	conversion_of_scalar_types(std::string str);

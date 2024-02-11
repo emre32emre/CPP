@@ -9,5 +9,9 @@ int main(int ac, char **av)
 	}
 	
 	std::string str = (std::string)av[1];
-	ScalarConverter::convert(str);
+	if (ScalarConverter::is_valid(str)){
+		conversion_of_scalar_types(str);
+	}
+	else
+		std::cerr << "Invalid" << std::endl;
 }
