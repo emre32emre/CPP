@@ -44,9 +44,67 @@ bool is_valid(std::string &str)
 	return (true);
 }
 
+void convert_to_char(std::string &str) {
+	if (is_default(str)) {
+		std::cout << "impossible" << std::endl;
+		return ;
+	}
+    int num = std::atoi(str.c_str());
+    char c = static_cast<char>(num);
+    if (!isprint(c) || (std::stoi(str) > 125)){
+        std::cout << "Non Displayable" << std::endl;
+        return;
+    }
+	std::cout << "'" << c << "'" <<  std::endl;
+}
+
+void	convert_to_float(std::string &str)
+{
+	float number = std::strtof(str.c_str(), nullptr); // second params is for error handling (first invalid char adress)
+	if (number - static_cast<int>(number) == 0)
+	{
+		std::cout << number << ".0f" << std::endl;
+		return ;
+	}
+	std::cout << number << "f" << std::endl;
+}
+
+
+void	convert_to_double(std::string &str)
+{
+	double number = std::strtod(str.c_str(), nullptr);
+	if (number - static_cast<int>(number) == 0)
+	{
+		std::cout << number << ".0" << std::endl;
+		return ;
+	}
+	std::cout << number << std::endl;
+}
+
+
+void	convert_to_int(std::string &str)
+{
+	if (is_default(str)) {
+		std::cout << "impossible" << std::endl;
+		return;
+	}
+	std::cout << std::atoi(str.c_str()) << std::endl;
+}
+
+void	conversion_of_scalar_types(std::string str) {
+	std::cout << "Char   : ", convert_to_char(str);
+	std::cout << "Int    : ", convert_to_int(str);
+	std::cout << "Float  : ", convert_to_float(str);
+	std::cout << "Double : ", convert_to_double(str);
+}
+
 
 void ScalarConverter::convert(std::string &literal){
 
 	bool is_okey = is_valid(literal);
-	std::cout << "literal:" << literal << "  | is valid:"  << is_okey << std::endl;
+
+	if (is_okey) conversion_of_scalar_types(literal);
+
+	else std::cout << "Invalid" << std::endl; 
+
 }
