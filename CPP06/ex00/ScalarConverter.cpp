@@ -6,6 +6,29 @@ ScalarConverter::ScalarConverter(ScalarConverter const &other) {*this = other;}
 ScalarConverter &ScalarConverter::operator=(ScalarConverter const &other) {(void)other;return *this;}
 ScalarConverter::~ScalarConverter() {}
 
+int ScalarConverter::isValid(const std::string &str) {
+	if (str == "nan" || str == "nanf" || str == "+inf" || str == "-inf" || str == "+inff" || str == "-inff" || str == "inf" || str == "inff")
+		return (1);
+	else if (str.find_first_of("+-") != str.find_last_of("+-"))
+		return (0);
+	else if (str.find_first_not_of("+-0123456789") == std::string::npos)
+		return (3);
+	else if (str.find_first_not_of("+-0123456789.")== std::string::npos) {
+		if (str.find_first_of(".") != str.find_last_of(".") || isdigit(str[str.find_first_of(".") + 1]) == false || str.find_first_of(".") == 0)
+			return(0); 
+		return (4);
+	}
+	else if (str.find_first_not_of("+-0123456789.f") == std::string::npos) {
+		if (str.find_first_of("f") != str.find_last_of("f") || str.find_first_of(".") != str.find_last_of(".") || str.find_first_of("f") - str.find_first_of(".") == 1 || isdigit(str[str.find_first_of(".") + 1]) == false || str.find_first_of(".") == 0)
+			return(0);
+		return (5);
+	}
+	else if (str.length() == 1 && isprint(str[0]))
+		return (2);
+	return (0);
+}
+
+
 void ScalarConverter::convert(const std::string &str) {
 
 	int type = ScalarConverter::isValid(str);
@@ -15,8 +38,6 @@ void ScalarConverter::convert(const std::string &str) {
 		3 -> int
 		4 -> double
 		5 -> float 	*/
-
-
 	if (type == 0) {
 		std::cout << "Error: Impossible to print or input not convertable" << std::endl;
 		return ;
@@ -37,27 +58,6 @@ void ScalarConverter::convert(const std::string &str) {
     }
 }
 
-int ScalarConverter::isValid(const std::string &str) {
-	if (str == "nan" || str == "nanf" || str == "+inf" || str == "-inf" || str == "+inff" || str == "-inff" || str == "inf" || str == "inff")
-		return (1);
-	else if (str.find_first_of("+-") != str.find_last_of("+-"))
-		return (0);
-	else if (str.length() == 1 && isprint(str[0]))
-		return (2);
-	else if (str.find_first_not_of("+-0123456789") == std::string::npos)
-		return (3);
-	else if (str.find_first_not_of("+-0123456789.")== std::string::npos) {
-		if (str.find_first_of(".") != str.find_last_of(".") || isdigit(str[str.find_first_of(".") + 1]) == false || str.find_first_of(".") == 0)
-			return(0); 
-		return (4);
-	}
-	else if (str.find_first_not_of("+-0123456789.f") == std::string::npos) {
-		if (str.find_first_of("f") != str.find_last_of("f") || str.find_first_of(".") != str.find_last_of(".") || str.find_first_of("f") - str.find_first_of(".") == 1 || isdigit(str[str.find_first_of(".") + 1]) == false || str.find_first_of(".") == 0)
-			return(0);
-		return (5);
-	}
-	return (0);
-}
 
 void ScalarConverter::print(int type, const std::string& input, char c, int i, float f, double d)
 {
@@ -68,7 +68,6 @@ void ScalarConverter::print(int type, const std::string& input, char c, int i, f
 }
 
 void	ScalarConverter::printChar(int type, int i, char c) {
-
 	if (type == 1 || i < 0 || i > 255){
 		std::cout << "char: impossible" << std::endl;
 		return ;
