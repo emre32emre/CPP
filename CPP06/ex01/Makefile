@@ -1,19 +1,22 @@
-NAME = Serializer
-FLAGS = -Wall -Wextra -Werror
-STD = -std=c++98
+SRC = Serializer.cpp Data.cpp main.cpp
+OBJ = $(SRC:.cpp=.o)
 CC = c++
-SRCS = main.cpp Data.cpp
+RM = rm -f
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 
+
+NAME = reinterpret_cast
 
 all: $(NAME)
 
-$(NAME):
-	$(CC) $(STD) $(FLAGS) -o $(NAME) $(SRCS)
+$(NAME): $(OBJ)
+	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	rm -f $(NAME)
+	$(RM) $(OBJ)
 
 fclean: clean
+	$(RM) $(NAME)
 
-re: clean all
+re: fclean $(NAME)
 
 .PHONY: all clean fclean re

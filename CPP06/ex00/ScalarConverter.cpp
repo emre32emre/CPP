@@ -11,6 +11,8 @@ int ScalarConverter::isValid(const std::string &str) {
 		return (1);
 	else if (str.find_first_of("+-") != str.find_last_of("+-"))
 		return (0);
+	else if (str.length() == 1 &&	(str[0] == '+' || str[0] == '-' || str[0] == '.' || str[0] == 'f') )
+		return (2);
 	else if (str.find_first_not_of("+-0123456789") == std::string::npos)
 		return (3);
 	else if (str.find_first_not_of("+-0123456789.")== std::string::npos) {
@@ -42,7 +44,7 @@ void ScalarConverter::convert(const std::string &str) {
 		std::cout << "Error: Impossible to print or input not convertable" << std::endl;
 		return ;
 	}
-	char c = '\0'; int i; float f; double d;
+	char c; int i; float f; double d;
 	if (type == 2) {
         c = static_cast<char>(str[0]);
         ScalarConverter::print(type, str, c, static_cast<int>(c), static_cast<float>(c), static_cast<double>(c));

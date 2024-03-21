@@ -1,27 +1,49 @@
-#include "iostream"
 
-#include "Data.hpp"
-#include <iostream>
 
-int main()
+#include "Serializer.hpp"
+
+int main(void)
 {
-    Data *ds = new Data;
-    ds->a = 42;
-    ds->b = 21;
+	{
+		Data	*ptr  = 0;
+		Data	*ptr2 = 0;
+		uintptr_t raw = 0;
 
-    std::cout << ds << std::endl;
-    uintptr_t rawPtr = Serializer::serialize(ds);
-    std::cout << rawPtr << std::endl;
+		try
+		{
+			ptr = new Data(65);
+			raw = Serializer::serialize(ptr);
+			ptr2 = Serializer::deserialize(raw);
 
-    float* ptr = reinterpret_cast<float*>(rawPtr);
-    std::cout << *ptr << std::endl;
-    ptr++;
-    std::cout << *ptr << std::endl;
+			std::cout << "************************" << std::endl;
+			std::cout << ptr->getRaw() << std::endl;
+			std::cout << ptr2->getRaw() << std::endl;
+			std::cout << raw << std::endl;
+			std::cout << Serializer::serialize(ptr2) << std::endl;
+			std::cout << "************************" << std::endl;
+			delete ptr;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		Data	*ptr = 0;
+		uintptr_t raw = 0;
+		uintptr_t raw2 = 0;
 
-    Data *tmp = NULL;
-    tmp = Serializer::deserialize(rawPtr);
-    std::cout << tmp << std::endl;
-    std::cout << tmp->a << std::endl << tmp->b << std::endl;
-    delete ds;
-    return 0;
+		raw = reinterpret_cast<uintptr_t>((Data [1]){30});
+		ptr = Serializer::deserialize(raw);
+		raw2 = Serializer::serialize(ptr);
+
+		std::cout << "************************" << std::endl;
+		std::cout << ptr->getRaw() << std::endl;
+		std::cout << Serializer::deserialize(raw2)->getRaw() << std::endl;
+		std::cout << raw << std::endl;
+		std::cout << raw2 << std::endl;
+		std::cout << "************************" << std::endl;
+	}
+	return (0);
 }
+

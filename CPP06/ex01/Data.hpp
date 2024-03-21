@@ -1,13 +1,24 @@
-#pragma once
 
-#include <string>
 
-typedef struct {
-    float a, b;
-} Data;
+#ifndef DATA_HPP
+# define DATA_HPP
+# include <iostream>
 
-class Serializer {
+typedef struct Data
+{
+private:
+	uintptr_t	_raw;
 public:
-    static uintptr_t serialize(Data* data);
-    static Data* deserialize(uintptr_t raw);
-};
+	//Orthodox Canonical Form
+	Data(void);
+	Data(uintptr_t raw);
+	Data(const Data& copy);
+	~Data(void);
+	Data&	operator=(const Data& other);
+
+	//Setters and Getters
+	void				setRaw(uintptr_t raw);
+	const uintptr_t&	getRaw(void) const;
+}				Data;
+
+#endif
